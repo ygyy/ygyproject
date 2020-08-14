@@ -1,0 +1,14 @@
+# 数据源配置,这里使用springboot默认自动配置的数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/myproject?characterEncoding=utf8&useSSL=false
+# Mybatis相关配置
+mybatis:
+  # 对象别名包
+  type-aliases-package: com.ygy.myproject.model
+  # Mybatis mapper.xml映射文件配置
+  mapper-locations:
+    - classpath:mappers/*.xml
