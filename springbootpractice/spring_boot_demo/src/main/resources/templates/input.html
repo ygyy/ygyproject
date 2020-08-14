@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>录入客户信息</title>
+</head>
+<body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("form").submit(function (e) {
+            var t = $('form').serializeArray();
+            if(t[1].value == null || t[1].value == ""){
+                alert("客户名称不能为空！");
+                return false;
+            }
+        })
+    })
+
+</script>
+<form th:action="@{~/customer/save}" method="post">
+    <input type="hidden" name="id" th:field="${cust.id}"/>
+    客户姓名：<input type="text" name="name" th:field="${cust.name}"/><br/>
+    客户性别：<input type="text" name="gender" th:field="${cust.gender}"/><br/>
+    客户手机：<input type="text" name="telephone" th:field="${cust.telephone}"/><br/>
+    客户住址：<input type="text" name="address" th:field="${cust.address}"/><br/>
+    <input type="submit" value="保存"/>
+</form>
+
+</body>
+</html>

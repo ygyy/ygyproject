@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件存放CRUD的sql语句 -->
+<mapper namespace="com.glodon.springboot.spring_boot_demo.dao.CustomerMapper">
+
+    <resultMap id="BaseResultMap" type="com.glodon.springboot.spring_boot_demo.domain.Customer">
+      <id column="id" jdbcType="INTEGER" property="id"/>
+      <result column="name" jdbcType="VARCHAR" property="name"/>
+      <result column="gender" jdbcType="VARCHAR" property="gender"/>
+      <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+      <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <insert id="save" parameterType="customer">
+  INSERT INTO t_customer
+   (
+   NAME,
+   gender,
+   telephone,
+   address
+   )
+   VALUES
+   (
+   #{name},
+   #{gender},
+   #{telephone},
+   #{address}
+   )
+ </insert>
+ <!-- 根据id获取客户信息 -->
+ <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from t_customer t where t.id = #{id}
+    </select>
+ <!-- 获取所有信息 -->
+ <select id="findAll" resultMap="BaseResultMap">
+      select * from t_customer t
+    </select>
+  <!-- 修改 -->
+ <update id="update" parameterType="customer">
+        update t_customer set name=#{name},gender=#{gender},telephone=#{telephone},address=#{address} where id = #{id}
+    </update>
+ <!-- 删除 -->
+ <delete id="delete" parameterType="java.lang.Integer">
+        delete from t_customer where id = #{id}
+    </delete>
+
+
+
+
+</mapper>

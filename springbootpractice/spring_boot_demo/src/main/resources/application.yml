@@ -1,0 +1,26 @@
+age: 18
+aa: AAA
+context: "aa: ${aa} age: ${age}"
+
+boy:
+  age: 20
+  height: 180
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    url: jdbc:mysql:///springjdbc
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    connectionProperties: druid.stat.mergeSql=true
+mybatis:
+  type-aliases-package: com.glodon.springboot.spring_boot_demo.domain
+  mapper-locations: classpath:mapper/*.xml
+thymeleaf:
+  prefix: classpath:/templates/

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+        <!--<bean id="helloWorld" class="com.ygy.HelloWorld">
+            <property name="userName" value="Spring"></property>
+
+        </bean>
+        <bean id="car" class="com.ygy.Car">
+            <constructor-arg value="奥迪" type="java.lang.String"></constructor-arg>
+        </bean>
+        <bean id="person" class="com.ygy.Person">
+            <constructor-arg value="ygy" index="0"></constructor-arg>
+            <constructor-arg value="25" name="age"></constructor-arg>
+            <constructor-arg ref="car" index="2"></constructor-arg>
+        </bean>
+        <bean id="car0" class="com.ygy.collections.Car">
+            <constructor-arg name="name" value="宝马"></constructor-arg>
+        </bean>
+        <bean id="car1" class="com.ygy.collections.Car">
+            <constructor-arg name="name" value="宾利"></constructor-arg>
+        </bean>
+        <bean id="person1" class="com.ygy.collections.Person">
+            <constructor-arg value="ygy" index="0"></constructor-arg>
+            <constructor-arg value="25" name="age"></constructor-arg>
+            <constructor-arg index="2">
+                <list>
+                    <ref bean="car0"></ref>
+                    <ref bean="car1"></ref>
+                </list>
+            </constructor-arg>
+            &lt;!&ndash;<constructor-arg index="2">
+                <map>
+                    <entry key="car0" value-ref="car"></entry>
+                    <entry key="car1" value-ref="car1"></entry>
+                </map>
+            </constructor-arg>&ndash;&gt;
+        </bean>-->
+    <bean id="address" class="com.ygy.autowire.Address" p:city="北京" p:street="回龙观"/>
+    <bean id="car" class="com.ygy.autowire.Car" p:brand="奥迪" p:price="300000"></bean>
+    <!--<bean id="person" class="com.ygy.autowire.Person" p:name="Tom" p:car-ref="car" p:address-ref="address"></bean>-->
+    <!--自动装配-->
+    <bean id="person" class="com.ygy.autowire.Person" p:name="Tom" autowire="byName" ></bean>
+
+</beans>

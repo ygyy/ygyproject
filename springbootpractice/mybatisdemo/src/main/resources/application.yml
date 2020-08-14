@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql:///mybatisdb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  type-aliases-package: com.ygy.mybatisdemo.domain
+  mapper-locations: classpath:mapper/*.xml
+thymeleaf:
+  prefix: classpath:/templates/

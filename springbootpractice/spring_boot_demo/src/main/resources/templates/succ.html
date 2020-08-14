@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>客户信息</title>
+</head>
+<body>
+<h1>客户信息</h1>
+<hr><br><br>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>客户姓名</th>
+        <th>客户性别</th>
+        <th>客户电话</th>
+        <th>客户地址</th>
+        <th>操作</th>
+        <th>操作</th>
+    </tr>
+
+    <!--遍历存放在map集合中的学生信息-->
+    <tr th:each="customer:${customer}">
+        <th th:text="${customer.getId()}"></th>
+        <th th:text="${customer.getName()}"></th>
+        <th th:text="${customer.getGender()}"></th>
+        <th th:text="${customer.getTelephone()}"></th>
+        <th th:text="${customer.getAddress()}"></th>
+        <th><a th:href="@{/customer/findbyId(id=${customer.getId()})}">编辑</a></th>
+        <th><a th:href="@{/customer/delete(id=${customer.getId()})}">删除</a></th>
+    </tr>
+</table>
+
+<a th:href="@{/customer/input}"><input type="button" value="增加"></a>
+</body>
+</html>
