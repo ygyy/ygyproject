@@ -17,6 +17,7 @@
         <module>springcloud-eureka-serviceconsume</module>
         <module>springcloud-eureka-servicesupport</module>
     </modules>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
