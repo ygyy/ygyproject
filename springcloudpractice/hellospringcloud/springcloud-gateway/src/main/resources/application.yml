@@ -1,0 +1,14 @@
+server:
+  port: 9527
+
+spirng:
+  application:
+    name: cloud-gateway
+
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-regist

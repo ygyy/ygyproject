@@ -16,6 +16,9 @@
         <module>springcloud-eureka-server</module>
         <module>springcloud-eureka-serviceconsume</module>
         <module>springcloud-eureka-servicesupport</module>
+        <module>springcloud-config</module>
+        <module>springcloud-config-server</module>
+        <module>springcloud-gateway</module>
     </modules>
     
     <dependencies>
