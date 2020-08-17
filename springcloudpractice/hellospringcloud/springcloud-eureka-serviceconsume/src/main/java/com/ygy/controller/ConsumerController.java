@@ -1,5 +1,6 @@
 package com.ygy.controller;
 
+import com.ygy.HelloServiceFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @RestController
-@RequestMapping("/hello")
 public class ConsumerController {
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
-    @Autowired
-    private RestTemplate restTemplate;
+
+    @Resource
+    HelloServiceFeignClient helloServiceFeignClient;
 
     @GetMapping("/consumer/{name}")
     public String helloWorld(@PathVariable String name){
@@ -27,7 +28,9 @@ public class ConsumerController {
         //String forObject = new RestTemplate().getForObject("http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+"/Hello/World?s="+s,String.class);
 
         //第三种调用方式 需要restTemplate注入的方式
-        String forObject = restTemplate.getForObject("http://helloservice/hello/"+name, String.class);
-        return forObject;
+        //String forObject = restTemplate.getForObject("http://helloservice/hello/"+name, String.class);
+
+        //用feign
+        return helloServiceFeignClient.consumer(name);
     }
 }

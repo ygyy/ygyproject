@@ -12,4 +12,4 @@ eureka:
 #当前服务名称
 spring:
   application:
-    name: helloservice
+    name: hello-service

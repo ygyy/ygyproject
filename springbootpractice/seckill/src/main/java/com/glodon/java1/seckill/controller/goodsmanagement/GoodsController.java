@@ -76,7 +76,7 @@ public class GoodsController {
      * @auth:ygy
      * @date:2020/8/7 根据商品id修改商品信息，返回状态
      */
-    @PutMapping("products")
+    @PutMapping("products/")
     @CrossOrigin
     public Result updateProduct(@RequestBody Product product){
         try {
@@ -101,57 +101,13 @@ public class GoodsController {
     /**
      * @auth:ygy
      * @date:2020/8/7
-     * 根据商品Id获取商品详情
-     * @param productId
-     * @return
-     */
-    @CrossOrigin
-    @GetMapping("products/{productId}")
-    public Result getProduct(@PathVariable Integer productId){
-        try{
-            //根据id查找商品信息
-            Product product = goodsService.getProductById(productId);
-            if(product!=null){
-                //查库存
-                Integer curCount = redisService.getPVal("goodsStocks", product.getCode());
-                if(curCount!=null){//redis能查到库存
-                    product.setCurCount(curCount);
-                }else{//不能查到库存，去mysql数据库计算当前库存
-                    product.setCurCount(goodsService.getCurPruductCount(productId));
-                }
-                List<String> phoneList = new ArrayList<>();//秒杀成功的手机号
-                //查该商品秒杀成功的手机号
-                List<Order> orderList = redisService.getAllobj("orderMessage", Order.class);
-                if(orderList==null){//redis已过期或未更新，去mysql查
-                    orderList = goodsService.getOrderByProductId(product.getProductId());
-                }
-                for (Order o:orderList) {//加入秒杀成功手机号
-                    if(o.getBuyStatus().equals("1")){
-                        phoneList.add(o.getPhone());
-                    }
-                }
-                return new DetailResult(product,Meta.SUCCESS,phoneList);
-            }
-            Meta meta = Meta.SUCCESS;
-            meta.setMsg("获取失败！");
-            return Result.error(meta);
-        }catch (Exception e){
-            e.printStackTrace();
-            return Result.error(Meta.SERVER_ERROR);
-        }
-
-    }
-
-    /**
-     * @auth:ygy
-     * @date:2020/8/7
      * 批量上架/下架
      * @param status
      * @param ids
      * @return
      */
     @CrossOrigin
-    @PutMapping("products/{status}")
+    @PutMapping("products//{status}")
     public Result updateProductsStatus(@PathVariable String status, @RequestBody List<Integer> ids){
         int flag;//成功或失败的状态标志
         try{
@@ -209,6 +165,52 @@ public class GoodsController {
             return new Result(Meta.SERVER_ERROR);
         }
     }
+
+    /**
+     * @auth:ygy
+     * @date:2020/8/7
+     * 根据商品Id获取商品详情
+     * @param productId
+     * @return
+     */
+    @CrossOrigin
+    @GetMapping("products/{productId}")
+    public Result getProduct(@PathVariable Integer productId){
+        try{
+            //根据id查找商品信息
+            Product product = goodsService.getProductById(productId);
+            if(product!=null){
+                //查库存
+                Integer curCount = redisService.getPVal("goodsStocks", product.getCode());
+                if(curCount!=null){//redis能查到库存
+                    product.setCurCount(curCount);
+                }else{//不能查到库存，去mysql数据库计算当前库存
+                    product.setCurCount(goodsService.getCurPruductCount(productId));
+                }
+                List<String> phoneList = new ArrayList<>();//秒杀成功的手机号
+                //查该商品秒杀成功的手机号
+                List<Order> orderList = redisService.getAllobj("orderMessage", Order.class);
+                if(orderList==null){//redis已过期或未更新，去mysql查
+                    orderList = goodsService.getOrderByProductId(product.getProductId());
+                }
+                for (Order o:orderList) {//加入秒杀成功手机号
+                    if(o.getBuyStatus().equals("1")){
+                        phoneList.add(o.getPhone());
+                    }
+                }
+                return new DetailResult(product,Meta.SUCCESS,phoneList);
+            }
+            Meta meta = Meta.SUCCESS;
+            meta.setMsg("获取失败！");
+            return Result.error(meta);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(Meta.SERVER_ERROR);
+        }
+
+    }
+
+
 
 }
 
