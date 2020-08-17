@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springcloud-eureka-serviceconsume</artifactId>
-
     <dependencies>
         <!--引入springcloud的euekea server依赖-->
         <!--<dependency>
