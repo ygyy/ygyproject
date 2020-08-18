@@ -1,4 +1,4 @@
-package com.ygy;
+package com.ygy.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface HelloServiceFeignClient {
 
     @GetMapping("/hello/{name}")
-    String consumer(@PathVariable String name);
+    String consumer(@PathVariable("name") String name);
 }
